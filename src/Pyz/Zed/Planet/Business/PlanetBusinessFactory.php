@@ -8,6 +8,7 @@ use Pyz\Zed\Planet\Persistence\PlanetEntityManagerInterface;
 use Pyz\Zed\Planet\Persistence\PlanetRepositoryInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use Pyz\Zed\Planet\Business\Planet\PlanetReaderInterface;
+use Pyz\Zed\Planet\Business\Planet\PlanetReader;
 
 /**
  * @method PlanetEntityManagerInterface getEntityManager()

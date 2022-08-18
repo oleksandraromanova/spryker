@@ -4,6 +4,9 @@ namespace Pyz\Zed\Planet\Business;
 
 use Generated\Shared\Transfer\PlanetTransfer;
 
+//gateway
+use Generated\Shared\Transfer\PlanetCollectionTransfer;
+
 interface PlanetFacadeInterface
 {
     /**
@@ -17,8 +20,7 @@ interface PlanetFacadeInterface
      * @api
      *
      */
-
-public function savePlanet(PlanetTransfer $planetTransfer): PlanetTransfer;
+    public function savePlanet(PlanetTransfer $planetTransfer): PlanetTransfer;
 
     /**
      * Specification:
@@ -29,8 +31,11 @@ public function savePlanet(PlanetTransfer $planetTransfer): PlanetTransfer;
      *
      * @return PlanetTransfer|null
      */
-
     public function findPlanetById(int $idPlanet): ?PlanetTransfer;
 
-
+    /**
+     * @param PlanetCollectionTransfer $planetCollectionTransfer
+     * @return PlanetCollectionTransfer|null
+     */
+    public function getPlanetCollection(PlanetCollectionTransfer $planetCollectionTransfer): ?PlanetCollectionTransfer;
 }
