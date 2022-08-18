@@ -587,7 +587,9 @@ $config[OmsConstants::PROCESS_LOCATION] = [
     OmsConfig::DEFAULT_PROCESS_LOCATION,
     APPLICATION_ROOT_DIR . '/vendor/spryker/payment/config/Zed/Oms',
 ];
-$config[OmsConstants::ACTIVE_PROCESSES] = [];
+$config[OmsConstants::ACTIVE_PROCESSES] = [
+    'Demo01',
+];
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'B2CStateMachine01',
 ];
