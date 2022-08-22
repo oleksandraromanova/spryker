@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\Planet\Business\Planet;
 
+use Generated\Shared\Transfer\PlanetCollectionTransfer;
 use Generated\Shared\Transfer\PlanetTransfer;
 
 interface PlanetReaderInterface
@@ -13,6 +14,13 @@ interface PlanetReaderInterface
      */
 
     public function findPlanetById(int $idPlanet): ?PlanetTransfer;
+
+    /**
+     * @param PlanetCollectionTransfer $planetsRestApiTransfer
+     * @return PlanetCollectionTransfer $planetsRestApiTransfer
+     */
+    public function getPlanetCollection(PlanetCollectionTransfer $planetsRestApiTransfer): PlanetCollectionTransfer;
+
 }
 
 

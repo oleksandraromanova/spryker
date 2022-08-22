@@ -3,23 +3,20 @@
 namespace Pyz\Zed\Planet\Communication\Controller;
 
 use Generated\Shared\Transfer\PlanetCollectionTransfer;
-use Pyz\Zed\Planet\Business\PlanetFacadeInterface;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
- * @method PlanetFacadeInterface getFacade()
+ * @method \Pyz\Zed\Planet\Business\PlanetFacadeInterface getFacade()
  */
 class GatewayController extends AbstractGatewayController
 {
     /**
-     * @param PlanetCollectionTransfer $planetCollectionTransfer
+     * @param \Generated\Shared\Transfer\PlanetCollectionTransfer $planetsRestApiTransfer
      *
-     * @return PlanetCollectionTransfer
-     *
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return \Generated\Shared\Transfer\PlanetCollectionTransfer $planetsRestApiTransfer
      */
-    public function getPlanetCollectionAction(PlanetCollectionTransfer $planetCollectionTransfer): PlanetCollectionTransfer
+    public function getPlanetCollectionAction(PlanetCollectionTransfer $planetsRestApiTransfer): PlanetCollectionTransfer
     {
-        //return $this->getFacade()->getAllPlanetEntity
+        return $this->getFacade()->getPlanetCollection($planetsRestApiTransfer);
     }
 }

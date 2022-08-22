@@ -32,11 +32,13 @@ class PlanetReader implements PlanetReaderInterface
         return $this->planetRepository->findPlanetById($idPlanet);
     }
 
-    public function findPlanet(?PlanetCollectionTransfer $planetCollectionTransfer) : PlanetCollectionTransfer
+    /**
+     * @param PlanetCollectionTransfer $planetsRestApiTransfer
+     * @return PlanetCollectionTransfer $planetsRestApiTransfer
+     */
+    public function getPlanetCollection(PlanetCollectionTransfer $planetsRestApiTransfer): PlanetCollectionTransfer
     {
-        // $planetCollectionTransfer = $this->planetRepository->??
-
-
+        return $this->planetRepository->getPlanetCollection($planetsRestApiTransfer);
     }
 
 }

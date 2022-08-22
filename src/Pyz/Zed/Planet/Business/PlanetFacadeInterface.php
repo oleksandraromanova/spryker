@@ -34,8 +34,10 @@ interface PlanetFacadeInterface
     public function findPlanetById(int $idPlanet): ?PlanetTransfer;
 
     /**
-     * @param PlanetCollectionTransfer $planetCollectionTransfer
-     * @return PlanetCollectionTransfer|null
+     * @param PlanetCollectionTransfer $planetsRestApiTransfer
+     * @return PlanetCollectionTransfer $planetsRestApiTransfer
      */
-    public function getPlanetCollection(PlanetCollectionTransfer $planetCollectionTransfer): ?PlanetCollectionTransfer;
+    public function getPlanetCollection(PlanetCollectionTransfer $planetsRestApiTransfer): PlanetCollectionTransfer;
+
+
 }
