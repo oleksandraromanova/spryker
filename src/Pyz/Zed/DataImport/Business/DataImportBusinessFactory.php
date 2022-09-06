@@ -121,6 +121,7 @@ use Spryker\Zed\Discount\DiscountConfig;
 use Spryker\Zed\PriceProduct\Business\PriceProductFacadeInterface;
 use Spryker\Zed\Stock\Business\StockFacadeInterface;
 use Spryker\Zed\Store\Business\StoreFacadeInterface;
+use Pyz\Zed\DataImport\Business\Model\Planet\PlanetWriterStep;
 
 /**
  * @method \Pyz\Zed\DataImport\DataImportConfig getConfig()
@@ -214,6 +215,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
                 return $this->createNavigationImporter($dataImportConfigurationActionTransfer);
             case DataImportConfig::IMPORT_TYPE_NAVIGATION_NODE:
                 return $this->createNavigationNodeImporter($dataImportConfigurationActionTransfer);
+            case DataImportConfig::IMPORT_TYPE_PLANET:
+                return $this->createPlanetImporter($dataImportConfigurationActionTransfer);
             default:
                 return null;
         }
@@ -695,7 +698,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     protected function createNavigationKeyToIdNavigationStep(
         $source = NavigationKeyToIdNavigationStep::KEY_SOURCE,
         $target = NavigationKeyToIdNavigationStep::KEY_TARGET
-    ) {
+    )
+    {
         return new NavigationKeyToIdNavigationStep($source, $target);
     }
 
@@ -1280,7 +1284,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     protected function createProductAbstractSkuToIdProductAbstractStep(
         string $source = ProductAbstractSkuToIdProductAbstractStep::KEY_SOURCE,
         string $target = ProductAbstractSkuToIdProductAbstractStep::KEY_TARGET
-    ): ProductAbstractSkuToIdProductAbstractStep {
+    ): ProductAbstractSkuToIdProductAbstractStep
+    {
         return new ProductAbstractSkuToIdProductAbstractStep($source, $target);
     }
 
@@ -1293,7 +1298,8 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     protected function createProductSkuToIdProductStep(
         string $source = ProductSkuToIdProductStep::KEY_SOURCE,
         string $target = ProductSkuToIdProductStep::KEY_TARGET
-    ): ProductSkuToIdProductStep {
+    ): ProductSkuToIdProductStep
+    {
         return new ProductSkuToIdProductStep($source, $target);
     }
 
@@ -1815,4 +1821,26 @@ class DataImportBusinessFactory extends SprykerDataImportBusinessFactory
     {
         return new CombinedProductGroupMandatoryColumnCondition();
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer
+     *
+     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface|\Spryker\Zed\DataImport\Business\Model\DataSet\DataSetStepBrokerAwareInterface
+     */
+    protected function createPlanetImporter(DataImportConfigurationActionTransfer $dataImportConfigurationActionTransfer)
+    {
+        $dataImporter = $this->getCsvDataImporterFromConfig(
+            $this->getConfig()->buildImporterConfigurationByDataImportConfigAction($dataImportConfigurationActionTransfer)
+        );
+
+        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker();
+        $dataSetStepBroker
+            ->addStep(new PlanetWriterStep());
+
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+
+        return $dataImporter;
+    }
+
+
 }

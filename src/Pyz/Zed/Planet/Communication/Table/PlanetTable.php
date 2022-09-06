@@ -29,8 +29,22 @@ class PlanetTable extends AbstractTable
      */
     protected function prepareData(TableConfiguration $config): array
     {
-        return $this->runQuery($this->planetQuery, $config);
+        $planetDataItems = $this->runQuery($this->planetQuery,
+            $config);
+        $planetTableRows = [];
+        foreach ($planetDataItems as $planetDataItem) {
+            $planetTableRows[] = [
+                PyzPlanetTableMap::COL_NAME =>
+                    $planetDataItem[PyzPlanetTableMap::COL_NAME],
+                PyzPlanetTableMap::COL_INTERESTING_FACT =>
+                    $planetDataItem[PyzPlanetTableMap:: COL_INTERESTING_FACT]
+            ];
+        }
+
+        return $planetTableRows;
+        //return $this->runQuery($this->planetQuery, $config);
     }
+
 
     /**
      * @param TableConfiguration $config
@@ -40,9 +54,16 @@ class PlanetTable extends AbstractTable
     protected
     function configure(TableConfiguration $config): TableConfiguration
     {
-        $config->setHeader([PyzPlanetTableMap::COL_NAME => 'Planet name', PyzPlanetTableMap::COL_INTERESTING_FACT => 'Interesting fact']);
-        $config->setSortable([PyzPlanetTableMap::COL_NAME, PyzPlanetTableMap::COL_INTERESTING_FACT]);
+        $config->setHeader
+        ([PyzPlanetTableMap::COL_NAME => 'Planet name',
+            PyzPlanetTableMap::COL_INTERESTING_FACT => 'Interesting fact']);
+
+        $config->setSortable
+        ([PyzPlanetTableMap::COL_NAME,
+            PyzPlanetTableMap::COL_INTERESTING_FACT]);
+
         $config->setSearchable([PyzPlanetTableMap::COL_NAME]);
+
         return $config;
     }
 
